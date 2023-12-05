@@ -1,15 +1,26 @@
 echo "Start post-create process"
 
-echo "1/4 - Clean dbt targets"
+echo "1/5 - Config GitHub account"
+
+read -p "Your name: " name
+git config --local user.name "$name"
+
+read -p "Your GitHub email: " email
+git config --local user.email $email
+
+read -p "Your GitHub username: " username
+git config --local credential.username $username
+
+echo "2/5 - Clean dbt targets"
 dbt clean
 
-echo "2/4 - Install dbt packages"
+echo "3/5 - Install dbt packages"
 dbt deps
 
-echo "3/4 - Check dbt configuration and connection"
+echo "4/5 - Check dbt configuration and connection"
 dbt debug
 
-echo "4/4 - Load the database with raw data"
+echo "5/5 - Load the database with raw data"
 dbt seed
 
 echo "End post-create process"
