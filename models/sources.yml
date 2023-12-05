@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: file
+    database: postgres
+    schema: sandbox_raw
+    tables:
+      - name: raw_customers
+      - name: raw_orders
+      - name: raw_payments

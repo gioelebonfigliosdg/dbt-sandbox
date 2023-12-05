@@ -1,0 +1,47 @@
+[sqlfluff]
+dialect = postgres
+templater = dbt
+# Comma separated list of rules to exclude, or None
+exclude_rules = references.qualification, structure.column_order, structure.using
+# The standard max_line_length is 80.
+# Set to zero or negative to disable checks.
+max_line_length = 120
+# CPU processes to use while linting.
+# The default is "single threaded" to allow easy debugging, but this
+# is often undesirable at scale.
+# If positive, just implies number of processes.
+# If negative or zero, implies number_of_cpus - specified_number.
+# e.g. -1 means use all processors but one. 0 means all cpus.
+processes = -1
+
+[sqlfluff:templater:dbt]
+project_dir = .
+profiles_dir = .
+profile = dbt_sandbox
+target = dev
+
+[sqlfluff:indentation]
+allow_implicit_indents = True
+indented_on_contents = False
+
+[sqlfluff:rules:aliasing.length]
+min_alias_length = 3
+
+[sqlfluff:rules:capitalisation.keywords]
+capitalisation_policy = upper
+
+[sqlfluff:rules:capitalisation.identifiers]
+extended_capitalisation_policy = lower
+ignore_words = _dbt_max_partition
+
+[sqlfluff:rules:capitalisation.functions]
+extended_capitalisation_policy = upper
+
+[sqlfluff:rules:capitalisation.literals]
+capitalisation_policy = lower
+
+[sqlfluff:rules:capitalisation.types]
+extended_capitalisation_policy = upper
+
+[sqlfluff:rules:structure.subquery]
+forbid_subquery_in = both
