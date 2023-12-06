@@ -1,3 +1,12 @@
+{{
+    config(
+        materialized = 'incremental',
+        incremental_strategy = 'merge',
+        merge_exclude_columns = ['created_at'],
+        unique_key = 'customer_id'
+    )
+}}
+
 WITH customers AS (
     SELECT * FROM {{ ref('stg_customers') }}
 ),
@@ -38,7 +47,9 @@ final AS (
         customer_orders.first_order,
         customer_orders.most_recent_order,
         customer_orders.number_of_orders,
-        customer_payments.total_amount AS customer_lifetime_value
+        customer_payments.total_amount AS customer_lifetime_value,
+        NOW() AS created_at,
+        NOW() AS updated_at
     FROM customers
     LEFT JOIN customer_orders
         ON customers.customer_id = customer_orders.customer_id

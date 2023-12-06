@@ -32,13 +32,14 @@ require-dbt-version: [">=1.7.0", "<1.8.0"]
 # directory as views. These settings can be overridden in the individual model
 # files using the `{{ config(...) }}` macro.
 models:
+  +unlogged: true
   dbt_sandbox:
     staging:
-      +materialized: view
       +schema: staging
-    public:
       +materialized: table
+    public:
       +schema: public
+      +on_schema_change: fail
 
 seeds:
   dbt_sandbox:

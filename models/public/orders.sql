@@ -1,3 +1,12 @@
+{{
+    config(
+        materialized = 'incremental',
+        incremental_strategy = 'merge',
+        merge_exclude_columns = ['created_at'],
+        unique_key = 'order_id'
+    )
+}}
+
 {% set payment_methods = ['credit_card', 'coupon', 'bank_transfer', 'gift_card'] %}
 
 WITH orders AS (
@@ -31,7 +40,9 @@ final AS (
         {% for payment_method in payment_methods -%}
             order_payments.{{ payment_method }}_amount,
         {% endfor -%}
-        order_payments.total_amount AS amount
+        order_payments.total_amount AS amount,
+        NOW() AS created_at,
+        NOW() AS updated_at
     FROM orders
     LEFT JOIN order_payments
         ON orders.order_id = order_payments.order_id
