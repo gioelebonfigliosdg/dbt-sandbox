@@ -6,6 +6,7 @@ All you need is Docker and VSCode, you can clone this repository in a Dev Contai
 
 The container build process will ask you to insert your GitHub credentials, here you can use your SDG account and it will not affect your git global configuration, since it will affect only this repository.
 At the end of the build process the Postgres database will be loaded with raw data through the _dbt seed_ command and you can use the loaded tables as your sources.
+The container will also have the VSCode SQLTools extension that you can use to manage the database and run queries.
 
 ## Setup
 1. Install Docker on your local machine
