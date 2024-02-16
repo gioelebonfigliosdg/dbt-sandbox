@@ -37,6 +37,7 @@ models:
     staging:
       +schema: staging
       +materialized: table
+      +required_tests: { "unique.*|not_null": 2 }
     public:
       +schema: public
       +on_schema_change: fail
