@@ -3,3 +3,5 @@ packages:
     version: [">=1.0.0", "<2.0.0"]
   - package: calogica/dbt_date
     version: [">=0.7.0", "<1.0.0"]
+  - package: dbt-labs/audit_helper
+    version: 0.12.0
