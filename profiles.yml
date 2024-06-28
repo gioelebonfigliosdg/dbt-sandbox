@@ -1,6 +1,3 @@
-config:
-  send_anonymous_usage_stats: false
-
 dbt_sandbox:
   target: dev
   outputs:
